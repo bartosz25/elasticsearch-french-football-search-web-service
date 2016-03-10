@@ -1,0 +1,333 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>waitingforcode.com</groupId>
+  <artifactId>webservice</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>French Football Stats Webapp</name>
+  <url>http://maven.apache.org</url>
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <es.version>2.2.0</es.version>
+        <mockito.version>1.10.19</mockito.version>
+        <guava.version>18.0</guava.version>
+        <jersey.version>2.14</jersey.version>
+        <spring-boot.version>1.2.2.RELEASE</spring-boot.version>
+        <spring.version>4.1.7.RELEASE</spring.version>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mainClass>com.waitingforcode.Application</mainClass>
+    </properties>
+    <repositories>
+        <repository>
+            <id>snapshot-repository.java.net</id>
+            <name>Java.net Snapshot Repository for Maven</name>
+            <url>https://maven.java.net/content/repositories/snapshots/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+  <dependencies>
+
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+      <dependency>
+          <groupId>com.tngtech.java</groupId>
+          <artifactId>junit-dataprovider</artifactId>
+          <version>1.9.3</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-core</artifactId>
+          <version>3.1.0</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.carrotsearch.randomizedtesting</groupId>
+          <artifactId>randomizedtesting-runner</artifactId>
+          <version>2.1.16</version>
+          <scope>test</scope>
+          <exclusions>
+              <exclusion>
+                  <artifactId>junit</artifactId>
+                  <groupId>junit</groupId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy</artifactId>
+          <version>2.4.6</version>
+      </dependency>
+      <dependency>
+          <groupId>org.elasticsearch.module</groupId>
+          <artifactId>lang-groovy</artifactId>
+          <version>2.2.0</version>
+      </dependency>
+
+
+
+      <!-- Spring -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-actuator</artifactId>
+          <version>${spring-boot.version}</version>
+          <exclusions>
+              <!--  <exclusion>
+                   <groupId>ch.qos.logback</groupId>
+                   <artifactId>logback-classic</artifactId>
+               </exclusion>
+               <exclusion>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>jcl-over-slf4j</artifactId>
+               </exclusion>
+               <exclusion>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>jul-to-slf4j</artifactId>
+               </exclusion>  -->
+          </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+          <version>${spring-boot.version}</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.jboss.logging</groupId>
+                  <artifactId>jboss-logging</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aop</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-jersey</artifactId>
+          <version>1.2.4.RELEASE</version>
+          <exclusions>
+              <exclusion>
+                  <artifactId>org.glassfish.jersey.containers</artifactId>
+                  <groupId>jersey-container-servlet-core</groupId>
+              </exclusion>
+              <exclusion>
+                  <artifactId>org.glassfish.jersey.containers</artifactId>
+                  <groupId>jersey-container-servlet-core</groupId>
+              </exclusion>
+              <exclusion>
+                  <artifactId>org.glassfish.jersey.ext</artifactId>
+                  <groupId>jersey-bean-validation</groupId>
+              </exclusion>
+              <exclusion>
+                  <artifactId>org.glassfish.jersey.ext</artifactId>
+                  <groupId>jersey-bean-validation</groupId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aspects</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+
+      <!-- Guava -->
+      <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>${guava.version}</version>
+      </dependency>
+      <!-- ElasticSearch -->
+    <dependency>
+        <groupId>org.elasticsearch</groupId>
+        <artifactId>elasticsearch</artifactId>
+        <version>${es.version}</version>
+    </dependency>
+
+      <dependency>
+          <groupId>org.elasticsearch</groupId>
+          <artifactId>elasticsearch</artifactId>
+          <version>${es.version}</version>
+          <type>test-jar</type>
+          <scope>test</scope>
+      </dependency>
+      <!-- Java EE -->
+      <dependency>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>javax.ws.rs-api</artifactId>
+          <version>2.0.1</version>
+      </dependency>
+      <!-- Jersey -->
+      <dependency>
+          <groupId>org.glassfish.jersey.containers</groupId>
+          <artifactId>jersey-container-servlet</artifactId>
+          <version>${jersey.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.glassfish.jersey.core</groupId>
+          <artifactId>jersey-server</artifactId>
+          <version>${jersey.version}</version>
+      </dependency>
+     <!-- <dependency>
+          <groupId>org.glassfish.jersey.core</groupId>
+          <artifactId>jersey-common</artifactId>
+          <version>${jersey.version}</version>
+      </dependency>    -->
+      <dependency>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+          <version>1.2.14</version>
+      </dependency>
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.4</version>
+          <scope>test</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-all</artifactId>
+          <version>${mockito.version}</version>
+          <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <version>${spring-boot.version}</version>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- this is a client, so apparrently not needed for purely "server" project -->
+      <dependency>
+          <groupId>org.glassfish.jersey.core</groupId>
+          <artifactId>jersey-client</artifactId>
+          <version>${jersey.version}</version>
+      </dependency>
+  </dependencies>
+
+    <!-- override profile to avoid "permission denied" error for Jenkins running locally and accessing local project owned by other user than jenkins -->
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+            <build>
+                <directory>target-jenkins</directory>
+            </build>
+        </profile>
+        <profile>
+            <id>jacoco</id>
+            <build>
+                <directory>target-jenkins</directory>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.7.2.201409121644</version>
+                        <executions>
+                            <execution>
+                                <id>jacoco-initialize</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>jacoco-site</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>sonar</id>
+            <build>
+                <directory>target-jenkins</directory>
+            </build>
+            <properties>
+                <!-- Example for MySQL-->
+                <sonar.jdbc.url>
+                    jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8
+                </sonar.jdbc.url>
+                <sonar.jdbc.username>sonar</sonar.jdbc.username>
+                <sonar.jdbc.password>sonar</sonar.jdbc.password>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                    http://localhost:9000
+                </sonar.host.url>
+                <sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
+                <sonar.junit.reportsPath>${project.build.directory}/jacoco-ut.exec</sonar.junit.reportsPath>
+                <sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
+            </properties>
+        </profile>
+    </profiles>
+
+  <build>
+    <directory>target</directory>
+    <finalName>webservice</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-failsafe-plugin</artifactId>
+              <version>2.16</version>
+              <executions>
+                  <execution>
+                      <id>default-integration-test</id>
+                      <goals>
+                          <goal>integration-test</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>sonar-maven-plugin</artifactId>
+              <version>2.4</version>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.18.1</version>
+              <configuration>
+                  <systemProperties>
+                      <log4j.debug>true</log4j.debug>
+                  </systemProperties>
+              </configuration>
+          </plugin>
+          <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+              <version>${spring-boot.version}</version>
+              <configuration>
+                  <jvmArguments>
+                      -Dspring.profiles.active=app
+                      -Duser.timezone=GMT
+                      -Dserver.port=8090
+                      -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=6600,server=y,suspend=n
+                  </jvmArguments>
+              </configuration>
+          </plugin>
+
+      </plugins>
+  </build>
+</project>

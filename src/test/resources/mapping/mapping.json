@@ -1,0 +1,176 @@
+{
+    "settings": {
+        "index": {
+            "analysis": {
+                "filter": {
+                    "team_abbr_synonyms_filter": {
+                        "type": "synonym",
+                        "tokenizer" : "keyword",
+                        "synonyms": [
+                            "st,saint",
+                            "rc,racing club",
+                            "fc,football club",
+                            "co,club olympique",
+                            "so,société olympique",
+                            "sc,sporting club",
+                            "o.,olympique",
+                            "ca,club athletic"
+                        ]
+                    },
+                    "preserving_original_filter": {
+                        "type": "word_delimiter",
+                        "preserve_original": true
+                    },
+                    "autocomplete_filter": {
+                        "type": "edge_ngram",
+                        "min_gram": 3,
+                        "max_gram": 20
+                    }
+                },
+                "analyzer": {
+                    "team_synonym_analyzer": {
+                        "tokenizer" : "keyword",
+                        "filter": ["lowercase", "team_abbr_synonyms_filter", "autocomplete_filter"]
+                    },
+                    "team_synonym_keyword_analyzer": {
+                        "tokenizer" : "keyword",
+                        "filter": ["lowercase", "team_abbr_synonyms_filter", "autocomplete_filter"]
+                    },
+                    "team_analyzer": {
+                        "tokenizer" : "keyword",
+                        "filter": ["lowercase", "team_abbr_synonyms_filter"]
+                    },
+                    "season_analyzer": {
+                        "tokenizer": "keyword"
+                    }
+                }
+            }
+        }
+    },
+    "mappings": {
+        "teams": {
+            "_ttl": {
+                "enabled": false
+            },
+            "_source" : {
+                "enabled": true
+            },
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "team_synonym_analyzer"
+                }
+            }
+        },
+        "scores": {
+            "_ttl": {
+                "enabled": false
+            },
+            "_source" : {
+                "enabled": true
+            },
+            "properties": {
+                "season": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "season_analyzer"
+                },
+                "hostTeam": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "team_analyzer"
+                },
+                "guestTeam": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "team_analyzer"
+                },
+                "hostGoals": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "guestGoals": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "allGoals": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "round": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                }
+            }
+        },
+        "tables": {
+            "_ttl": {
+                "enabled": false
+            },
+            "_source" : {
+                "enabled": true
+            },
+            "properties": {
+                "season": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "season_analyzer"
+                },
+                "team": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "team_analyzer"
+                },
+                "place": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "points": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "games": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "homeStats": {
+                    "type": "nested",
+                    "properties": {
+                        "games": {"type": "integer"},
+                        "points": {"type": "integer"},
+                        "wins": {"type": "integer"},
+                        "draws": {"type": "integer"},
+                        "losses": {"type": "integer"},
+                        "scored": {"type": "integer"},
+                        "conceded": {"type": "integer"}
+                    }
+                },
+                "awayStats": {
+                    "type": "nested",
+                    "properties": {
+                        "games": {"type": "integer"},
+                        "points": {"type": "integer"},
+                        "wins": {"type": "integer"},
+                        "draws": {"type": "integer"},
+                        "losses": {"type": "integer"},
+                        "scored": {"type": "integer"},
+                        "conceded": {"type": "integer"}
+                    }
+                },
+                "allStats": {
+                    "type": "nested",
+                    "properties": {
+                        "games": {"type": "integer"},
+                        "points": {"type": "integer"},
+                        "wins": {"type": "integer"},
+                        "draws": {"type": "integer"},
+                        "losses": {"type": "integer"},
+                        "scored": {"type": "integer"},
+                        "conceded": {"type": "integer"}
+                    }
+                }
+            }
+        }
+    }
+}
